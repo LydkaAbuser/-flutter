@@ -4,16 +4,10 @@ import '../models/weather_model.dart';
 
 class WeatherService {
  
-  static const String _apiKey = 'тут должен быть api ключ, но гит не даёт мне загрузить с ним.';
+  //'тут должен быть api ключ, но гит не даёт мне загрузить с ним.';
   
-  
-  static const String _baseUrl = 'https://dataservice.accuweather.com';
   
 
-  static Future<String> _getLocationKey(String cityName) async {
-    final url = Uri.parse(
-      '$_baseUrl/locations/v1/cities/search?apikey=$_apiKey&q=$cityName&language=ru-ru'
-    );
 
     try {
       final response = await http.get(url);
