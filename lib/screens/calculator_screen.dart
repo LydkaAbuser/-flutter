@@ -195,7 +195,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
                             _selectedUnit == 'm/s_to_km/h' ? 'км/ч' : 'м/с',
                             style: const TextStyle(
                               fontSize: 16,
-                              color: Colors.blue,
+                              color: Colors.green,
                             ),
                           ),
                         ],
