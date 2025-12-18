@@ -38,6 +38,9 @@ dependencies:
   sqflite: ^2.3.0
   path: ^1.9.0
   shared_preferences: ^2.2.2
+  
+  # HTTP package for NASA API requests
+  http: ^0.13.5
 
 dev_dependencies:
   flutter_test:
