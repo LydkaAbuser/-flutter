@@ -1,78 +1,71 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'screens/main_screen.dart';
-import 'screens/cubit/main_screen_cubit.dart';
-import 'screens/nasa_weather_screen.dart';
-import 'screens/cubit/nasa_weather_cubit.dart';
+import 'screens/home_screen.dart';
+import 'screens/calculator_screen.dart';
+import 'screens/developer_screen.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const WeatherApp());
 }
 
-class MyApp extends StatelessWidget {
+class WeatherApp extends StatelessWidget {
+  const WeatherApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(create: (context) => MainScreenCubit()),
-        BlocProvider(create: (context) => NasaWeatherCubit()),
-      ],
-      child: MaterialApp(
-        title: 'Лабораторная работа - Прокопенко И.А.',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-          appBarTheme: AppBarTheme(
-            backgroundColor: Color.fromARGB(255, 98, 139, 173),
-          ),
-        ),
-        home: HomeNavigationScreen(),
-        debugShowCheckedModeBanner: false,
+    return MaterialApp(
+      title: 'Погодное приложение',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+        scaffoldBackgroundColor: Colors.grey[50],
       ),
+      debugShowCheckedModeBanner: false,
+      home: const MainScreen(),
     );
   }
 }
 
-class HomeNavigationScreen extends StatefulWidget {
+class MainScreen extends StatefulWidget {
+  const MainScreen({super.key});
+
   @override
-  _HomeNavigationScreenState createState() => _HomeNavigationScreenState();
+  State<MainScreen> createState() => _MainScreenState();
 }
 
-class _HomeNavigationScreenState extends State<HomeNavigationScreen> {
-  int _selectedIndex = 0;
+class _MainScreenState extends State<MainScreen> {
+  int _currentIndex = 0;
 
-  final List<Widget> _screens = [
-    MainScreen(),
-    NasaWeatherScreen(),
-  ];
-
-  final List<String> _appBarTitles = [
-    'Калькулятор ускорения',
-    'Погода на Марсе',
+  final List<Widget> _pages = const [
+    HomeScreen(),
+    CalculatorScreen(),
+    DeveloperScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(_appBarTitles[_selectedIndex]),
-        backgroundColor: Color.fromARGB(255, 98, 139, 173),
+      body: IndexedStack(
+        index: _currentIndex,
+        children: _pages,
       ),
-      body: _screens[_selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _selectedIndex,
-        onTap: (index) {
+        currentIndex: _currentIndex,
+        onTap: (int index) {
           setState(() {
-            _selectedIndex = index;
+            _currentIndex = index;
           });
         },
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.calculate),
-            label: 'Калькулятор',
-          ),
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.cloud),
-            label: 'NASA Mars',
+            label: 'Погода',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calculate),
+            label: 'Расчет',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.person),
+            label: 'Разработчик',
           ),
         ],
       ),
