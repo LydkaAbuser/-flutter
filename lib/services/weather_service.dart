@@ -4,7 +4,7 @@ import '../models/weather_model.dart';
 
 class WeatherService {
  
-  static const String _apiKey = 'zpka_b5d715accea9465a9256516c3a9b8529_fd4f29f2';
+  static const String _apiKey = 'тут должен быть api ключ, но гит не даёт мне загрузить с ним.';
   
   
   static const String _baseUrl = 'https://dataservice.accuweather.com';
@@ -49,7 +49,7 @@ class WeatherService {
       if (response.statusCode == 200) {
         final List<dynamic> data = json.decode(response.body);
         if (data.isNotEmpty) {
-          // Добавляем имя города и location key в данные
+          
           final weatherData = data[0];
           weatherData['cityName'] = cityName;
           weatherData['locationKey'] = locationKey;
@@ -65,7 +65,7 @@ class WeatherService {
     }
   }
 
-  // Парсим ответ AccuWeather
+  //AccuWeather
   static WeatherRecord parseWeatherResponse(Map<String, dynamic> data, String cityName) {
     final temperature = data['Temperature']['Metric']['Value'];
     final weatherText = data['WeatherText'];
